@@ -15,7 +15,6 @@ import * as Yup from "yup";
 //   return errors;
 // };
 
-
 const validationSchema = Yup.object({
   name: Yup.string()
     .required("Name is Required")
@@ -29,7 +28,10 @@ const validationSchema = Yup.object({
     .nullable(),
   password: Yup.string()
     .required("Password is required")
-    .matches( /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"), 
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+    ),
   passwordConfirm: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Passwords must match"
@@ -49,6 +51,7 @@ const SignUpForm = () => {
       console.log(values);
     },
     validationSchema,
+    validateOnMount: true,
   });
 
   // console.log(formik.values);
@@ -103,7 +106,7 @@ const SignUpForm = () => {
             <div className="error">{formik.errors.passwordConfirm}</div>
           )}
         </div>
-        <button>Submit</button>
+        <button type="submit" disabled={!formik.isValid}>Submit</button>
       </form>
     </div>
   );
