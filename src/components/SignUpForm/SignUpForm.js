@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import Input from "../Common/input";
 import RadioInput from "../Common/RadioInput";
+import Select from "../Common/Select";
 
 // const validate = (values) => {
 //   let errors = {};
@@ -19,9 +20,16 @@ import RadioInput from "../Common/RadioInput";
 //   return errors;
 // };
 
-const radioOptions=[
-  {label:"Male",value:"0"},
-  {label:"Female",value:"1"},
+const radioOptions = [
+  { label: "Male", value: "0" },
+  { label: "Female", value: "1" },
+];
+
+const selectOptions=[
+  {label:"Select Nationality...",value:""},
+  {label:"Iran",value:"IR"},
+  {label:"Germany",value:"GER"},
+  {label:"United States",value:"US"},
 ]
 
 const initialValues = {
@@ -31,6 +39,7 @@ const initialValues = {
   password: "",
   passwordConfirm: "",
   gender: "",
+  nationality:"",
 };
 
 const validationSchema = Yup.object({
@@ -55,6 +64,7 @@ const validationSchema = Yup.object({
     "Passwords must match"
   ),
   gender: Yup.string().required("Select Gender"),
+  nationality: Yup.string().required("Select Nationality")
 });
 
 const SignUpForm = () => {
@@ -83,10 +93,21 @@ const SignUpForm = () => {
         <Input formik={formik} name="name" label="Name" />
         <Input formik={formik} name="email" label="Email" type="email" />
         <Input formik={formik} name="phoneNumber" label="Phone Number" />
-        <Input formik={formik} name="password" label="Password" type="password"/>
-        <Input formik={formik} name="passwordConfirm" label="Password Confirmation" type="password" />
+        <Input
+          formik={formik}
+          name="password"
+          label="Password"
+          type="password"
+        />
+        <Input
+          formik={formik}
+          name="passwordConfirm"
+          label="Password Confirmation"
+          type="password"
+        />
         <RadioInput formik={formik} radioOptions={radioOptions} name="gender" />
-        
+        <Select formik={formik} selectOptions={selectOptions} name="nationality"/>
+
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>

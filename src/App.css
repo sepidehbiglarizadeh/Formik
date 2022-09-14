@@ -17,7 +17,7 @@ input + label {
     margin-left: 5px;
 }
 
-.input {
+.input ,select {
     width: 400px;
     padding: 0.6rem 1.2rem;
     display: block;
