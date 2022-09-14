@@ -6,6 +6,7 @@ import Input from "../Common/input";
 import RadioInput from "../Common/RadioInput";
 import Select from "../Common/Select";
 import CheckBox from "../Common/CheckBox";
+import BooleanCheckBox from "../Common/BooleanCheckBox";
 
 // const validate = (values) => {
 //   let errors = {};
@@ -51,6 +52,13 @@ const initialValues = {
   terms: false,
 };
 
+const onSubmit = (values) => {
+  axios
+    .post("http://localhost:3001/users",values)
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err));
+};
+
 const validationSchema = Yup.object({
   name: Yup.string()
     .required("Name is Required")
@@ -85,9 +93,7 @@ const SignUpForm = () => {
 
   const formik = useFormik({
     initialValues: formValues || initialValues,
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    onSubmit,
     validationSchema,
     validateOnMount: true,
     enableReinitialize: true,
@@ -130,19 +136,7 @@ const SignUpForm = () => {
           checkBoxOptions={checkBoxOptions}
         />
 
-        <input
-          type="checkbox"
-          id="terms"
-          name="terms"
-          value={true}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          checked={formik.values.terms}
-        />
-        <label htmlFor="terms">Terms and Conditions</label>
-        {formik.errors.terms && formik.touched.terms && (
-          <div className="error">{formik.errors.terms}</div>
-        )}
+        <BooleanCheckBox formik={formik} name="terms" />
 
         <button type="submit" disabled={!formik.isValid}>
           Submit

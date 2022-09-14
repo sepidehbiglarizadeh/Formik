@@ -10,6 +10,7 @@ const RadioInput = ({ formik, name, radioOptions }) => {
             id={item.value}
             name={name}
             value={item.value}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             checked={formik.values[name] === item.value}
           />

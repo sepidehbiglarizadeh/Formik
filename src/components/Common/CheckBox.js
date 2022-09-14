@@ -10,6 +10,7 @@ const CheckBox = ({ formik, name, checkBoxOptions }) => {
             id={item.value}
             name={name}
             value={item.value}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             checked={formik.values[name].includes(item.value)}
           />
