@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import axios from "axios";
 import Input from "../Common/input";
+import RadioInput from "../Common/RadioInput";
 
 // const validate = (values) => {
 //   let errors = {};
@@ -17,6 +18,11 @@ import Input from "../Common/input";
 //   }
 //   return errors;
 // };
+
+const radioOptions=[
+  {label:"Male",value:"0"},
+  {label:"Female",value:"1"},
+]
 
 const initialValues = {
   name: "",
@@ -79,31 +85,8 @@ const SignUpForm = () => {
         <Input formik={formik} name="phoneNumber" label="Phone Number" />
         <Input formik={formik} name="password" label="Password" type="password"/>
         <Input formik={formik} name="passwordConfirm" label="Password Confirmation" type="password" />
-
-        <div className="formControl">
-          <input
-            type="radio"
-            id="0"
-            name="gender"
-            value="0"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "0"}
-          />
-          <label htmlFor="0">Male</label>
-          <input
-            type="radio"
-            id="1"
-            name="gender"
-            value="1"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "1"}
-          />
-          <label htmlFor="1">Female</label>
-          {formik.errors.gender && formik.touched.gender && (
-            <div className="error">{formik.errors.gender}</div>
-          )}
-        </div>
-        <button >Load Data</button>
+        <RadioInput formik={formik} radioOptions={radioOptions} name="gender" />
+        
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>
