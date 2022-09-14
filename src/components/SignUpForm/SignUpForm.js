@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import axios from "axios";
+import Input from "../Common/input";
 
 // const validate = (values) => {
 //   let errors = {};
@@ -73,66 +74,12 @@ const SignUpForm = () => {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <div className="formControl">
-          <label>Name</label>
-          <input
-            className="input"
-            type="text"
-            name="name"
-            {...formik.getFieldProps("name")}
-          />
-          {formik.errors.name && formik.touched.name && (
-            <div className="error">{formik.errors.name}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Email</label>
-          <input
-            className="input"
-            type="email"
-            name="email"
-            {...formik.getFieldProps("email")}
-          />
-          {formik.errors.email && formik.touched.email && (
-            <div className="error">{formik.errors.email}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>PhoneNumber</label>
-          <input
-            className="input"
-            type="text"
-            name="phoneNumber"
-            {...formik.getFieldProps("phoneNumber")}
-          />
-          {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-            <div className="error">{formik.errors.phoneNumber}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Password</label>
-          <input
-            className="input"
-            type="password"
-            name="password"
-            {...formik.getFieldProps("password")}
-          />
-          {formik.errors.password && formik.touched.password && (
-            <div className="error">{formik.errors.password}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Password Confirmation</label>
-          <input
-            className="input"
-            type="password"
-            name="passwordConfirm"
-            {...formik.getFieldProps("passwordConfirm")}
-          />
-          {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
-            <div className="error">{formik.errors.passwordConfirm}</div>
-          )}
-        </div>
+        <Input formik={formik} name="name" label="Name" />
+        <Input formik={formik} name="email" label="Email" type="email" />
+        <Input formik={formik} name="phoneNumber" label="Phone Number" />
+        <Input formik={formik} name="password" label="Password" type="password"/>
+        <Input formik={formik} name="passwordConfirm" label="Password Confirmation" type="password" />
+
         <div className="formControl">
           <input
             type="radio"
